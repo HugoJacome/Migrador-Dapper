@@ -1,0 +1,9 @@
+C:\Users\Admin\source\repos\MigradorDapper\bin\Debug\MigradorDapper.exe.config
+C:\Users\Admin\source\repos\MigradorDapper\bin\Debug\MigradorDapper.exe
+C:\Users\Admin\source\repos\MigradorDapper\bin\Debug\MigradorDapper.pdb
+C:\Users\Admin\source\repos\MigradorDapper\bin\Debug\Dapper.dll
+C:\Users\Admin\source\repos\MigradorDapper\bin\Debug\Dapper.xml
+C:\Users\Admin\source\repos\MigradorDapper\obj\Debug\MigradorDapper.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\MigradorDapper\obj\Debug\MigradorDapper.csproj.CopyComplete
+C:\Users\Admin\source\repos\MigradorDapper\obj\Debug\MigradorDapper.exe
+C:\Users\Admin\source\repos\MigradorDapper\obj\Debug\MigradorDapper.pdb
