@@ -39,5 +39,46 @@ namespace MigradorDapper.Repositories
                                                ,@Identifiers)";
             return await InsertQueryAsync<int>(query, branches);
         }
+
+        internal async Task<int> MigrateOrders(List<Orders> orders)
+        {
+            const string query = @"INSERT INTO [dbo].[Orders]
+                                               ([ProfileId]
+                                               ,[PrefixId]
+                                               ,[State]
+                                               ,[InitialSequential]
+                                               ,[Quantity]
+                                               ,[CreationDate]
+                                               ,[NotifyDate]
+                                               ,[ClosingDate]
+                                               ,[UserName]
+                                               ,[AutoGeneration])
+                                         VALUES
+                                               (@ProfileId
+                                               ,@PrefixId
+                                               ,@State
+                                               ,@InitialSequential
+                                               ,@Quantity
+                                               ,@CreationDate
+                                               ,@NotifyDate
+                                               ,@ClosingDate
+                                               ,@UserName
+                                               ,@AutoGeneration)";
+            return await InsertQueryAsync<int>(query, orders);
+        }
+
+        internal async Task<int> MigrateClients(List<Clients> clients)
+        {
+            const string query = @"INSERT INTO [dbo].[Clients]
+                                               ([Identification]
+                                               ,[Name]
+                                               ,[AgencyId])
+                                         VALUES
+                                               (@Identification
+                                               ,@Name
+                                               ,@AgencyId)";
+            return await InsertQueryAsync<int>(query, clients);
+        }
+
     }
 }

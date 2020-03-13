@@ -49,7 +49,12 @@
   <ItemGroup>
     <Compile Include="Migration.cs" />
     <Compile Include="Models\AdminTDDs\Agencia.cs" />
+    <Compile Include="Models\AdminTDDs\Cliente.cs" />
     <Compile Include="Models\AdminTDDs\Orden.cs" />
+    <Compile Include="Models\AdminTDDs\Tarjeta.cs" />
+    <Compile Include="Models\CardController\Cards.cs" />
+    <Compile Include="Models\CardController\CardsAccounts.cs" />
+    <Compile Include="Models\CardController\Clients.cs" />
     <Compile Include="Models\CardController\Orders.cs" />
     <Compile Include="Models\BaseRepository.cs" />
     <Compile Include="Models\CardController\Branch.cs" />

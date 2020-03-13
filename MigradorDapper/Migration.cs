@@ -50,5 +50,105 @@ namespace MigradorDapper
             }
             return branches.Count();
         }
+        public async Task<int> MigraOrdenes()
+        {
+            List<Orders> orders = new List<Orders>();
+            var ordenes = await ccRepo.GetOrders();
+            foreach (var orden in ordenes)
+            {
+                Orders order = new Orders
+                {
+                    ProfileId = 1,
+                    PrefixId = 1,
+                    State = 3,
+                    InitialSequential = 0,
+                    Quantity = orden.ORD_TOTAL,
+                    CreationDate = orden.ORD_FECHA_CREACION,
+                    ClosingDate = orden.ORD_FECHA_CIERRE,
+                    UserName = "MIGRACION"
+                };
+                orders.Add(order);
+            }
+            try
+            {
+                var migrated = await phiAdminRepo.MigrateOrders(orders);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error Agencia" + e.Message);
+                throw;
+            }
+            return orders.Count();
+        }
+        public async Task<int> MigrarClientes()
+        {
+            Clients client = new Clients();
+            List<Clients> clients = new List<Clients>();
+            int[] states = new int[] { 1, 2, 3, 5, 6, 11, 12, 13 };
+            var clientes = await ccRepo.GetClients(states);
+
+            foreach (var cli in clientes)
+            {
+                client = new Clients()
+                {
+                    Name = cli.CLI_NOMBRE,
+                    Identification = cli.CLI_IDENTIFICACION,
+                    AgencyId = cli.AGE_CODIGO,
+                    IdentityType = (cli.CLI_IDENTIFICACION.Length == 10) ? "C" : "R"
+                };
+                clients.Add(client);
+            }
+            try
+            {
+                var migrated = await phiAdminRepo.MigrateClients(clients);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error cliente: " + e.Message);
+                throw;
+            }
+            return clients.Count();
+        }
+        public async Task<int> MigraCuentasTarjetas29()
+        {
+            int[] states = new int[] { 1, 2, 3, 5, 6, 11, 12, 13 };
+            Cards cardNew = new Cards();
+            List<Cards> cards = new List<Cards>();
+
+            var tarjetas = await ccRepo.GetOrderCards(states);
+            var clientes = await ccRepo.GetClientsById();
+
+            //var cardsOld = tarjetas
+            //       .Join(clientes,
+            //       cc => cc.CLI_IDENTIFICACION,
+            //       t => t.,
+            //       (cc, t) => new { cc, t })
+            //       .Select(a => new {
+            //       })
+            //       .ToList();
+
+            foreach (var card in tarjetas)
+            {
+                int state = (card.EST_TAR_CODIGO == 12 || card.EST_TAR_CODIGO == 1) ? ((card.EST_TAR_CODIGO == 12) ? 1 : 12) : card.EST_TAR_CODIGO;
+                cardNew = new Cards()
+                {
+                   // Id = card.ID,
+                    ProfileId = 1,
+                    OrderId = card.ORD_CODIGO,
+                    BatchId = 1,
+                    State = state,
+                };
+            }
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error tarjeta cuenta: " + e);
+                throw;
+            }
+            return cards.Count();
+        }
     }
 }
