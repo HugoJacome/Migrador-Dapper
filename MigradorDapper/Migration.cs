@@ -127,6 +127,7 @@ namespace MigradorDapper
             //       })
             //       .ToList();
 
+
             foreach (var card in tarjetas)
             {
                 int state = (card.EST_TAR_CODIGO == 12 || card.EST_TAR_CODIGO == 1) ? ((card.EST_TAR_CODIGO == 12) ? 1 : 12) : card.EST_TAR_CODIGO;
