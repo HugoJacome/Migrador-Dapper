@@ -1,5 +1,7 @@
 ﻿using MigradorDapper.Models;
 using MigradorDapper.Models.AdminTDDs;
+using MigradorDapper.Models.CardController;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,6 +30,14 @@ namespace MigradorDapper.Repositories
                                     FROM AGENCIA";
             return (await EnumerableQueryAsync<Agencia>(query, new { })).ToArray();
         }
+        public async Task<int> GetBranchById(int branchId)
+        {
+            const string query = @"SELECT
+                                    INSTITUTIONID
+                                    FROM BRANCHES
+                                    WHERE INSTITUTIONID = @BRANCHID";
+            return (await QuerySingleOrDefaultAsync<int>(query, new { BRANCHID = branchId }));
+        }
 
         //public async Task<Cliente[]> GetClients()
         //{
@@ -47,8 +57,8 @@ namespace MigradorDapper.Repositories
                                     ON C.CLI_CODIGO = TC.CLI_CODIGO
                                     JOIN TARJETA T
                                     ON TC.TAR_ID = T.TAR_ID
-                                    WHERE T.EST_TAR_CODIGO IN (@states)";
-            return (await EnumerableQueryAsync<Cliente>(query, new { states })).ToArray();
+                                    WHERE T.EST_TAR_CODIGO IN  @STATES";
+            return (await EnumerableQueryAsync<Cliente>(query, new { STATES = states })).ToArray();
         }
 
 
@@ -69,8 +79,19 @@ namespace MigradorDapper.Repositories
                                     ON TC.TAR_ID = T.TAR_ID
                                     JOIN CLIENTE C 
                                     ON C.CLI_CODIGO = TC.CLI_CODIGO
-                                    WHERE T.EST_TAR_CODIGO IN";
-            return (await EnumerableQueryAsync<Tarjeta>(query, new { states })).ToArray();
+                                    WHERE T.EST_TAR_CODIGO IN @STATES";
+            return (await EnumerableQueryAsync<Tarjeta>(query, new { STATES = states })).ToArray();
+        }
+
+        public async Task<Cards[]> GetCards()
+        {
+            const string query = @"SELECT ID, CARDNUMBER from CARDS";
+            return (await EnumerableQueryAsync<Cards>(query, new {})).ToArray();
+        }
+        public async Task<Tarjeta[]> GetAccountCards()
+        {
+            const string query = @"SELEC CTA_NUMERO, TAR_ID FROM TARJETA_CUENTA";
+            return (await EnumerableQueryAsync<Tarjeta>(query, new {})).ToArray();
         }
     }
 }
