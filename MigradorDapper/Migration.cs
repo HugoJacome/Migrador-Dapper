@@ -118,14 +118,8 @@ namespace MigradorDapper
             var tarjetas = await ccRepo.GetOrderCards(states);
             var clientes = await ccRepo.GetClientsById();
 
-            //var cardsOld = tarjetas
-            //       .Join(clientes,
-            //       cc => cc.CLI_IDENTIFICACION,
-            //       t => t.,
-            //       (cc, t) => new { cc, t })
-            //       .Select(a => new {
-            //       })
-            //       .ToList();
+       
+       
 
 
             foreach (var card in tarjetas)
