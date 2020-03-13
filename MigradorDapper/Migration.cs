@@ -1,12 +1,9 @@
-﻿using Dapper;
-using MigradorDapper.Models.CardController;
+﻿using MigradorDapper.Models.CardController;
 using MigradorDapper.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MigradorDapper
@@ -50,6 +47,7 @@ namespace MigradorDapper
             }
             return branches.Count();
         }
+        
         public async Task<int> MigraOrdenes()
         {
             List<Orders> orders = new List<Orders>();
@@ -71,21 +69,21 @@ namespace MigradorDapper
             }
             try
             {
-                var migrated = await phiAdminRepo.MigrateOrders(orders);
+                var migrated = await admTddsRepo.MigrateOrders(orders);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error Agencia" + e.Message);
+                Console.WriteLine("Error Ordenes" + e.Message);
                 throw;
             }
             return orders.Count();
         }
-        public async Task<int> MigrarClientes()
+        public async Task<int> MigrarClientes29()
         {
             List<Clients> clients = new List<Clients>();
             int[] states = new int[] { 1, 2, 3, 5, 6, 11, 12, 13 };
             var clientes = await ccRepo.GetClients(states);
-            var branchId = await ccRepo.GetBranchById(institutionID);
+            var branchId = await phiAdminRepo.GetBranchById(institutionID);
             foreach (var cli in clientes)
             {
                 Clients client = new Clients()
@@ -99,7 +97,7 @@ namespace MigradorDapper
             }
             try
             {
-                var migrated = await phiAdminRepo.MigrateClients(clients);
+                var migrated = await admTddsRepo.MigrateClients(clients);
             }
             catch (Exception e)
             {
@@ -141,11 +139,11 @@ namespace MigradorDapper
 
             try
             {
-                var migrated = await phiAdminRepo.MigrateCardsAccounts(accounts);
+                var migrated = await admTddsRepo.MigrateCardsAccounts(accounts);
             }
             catch (Exception e)
             {
-                Console.WriteLine("error cliente: " + e.Message);
+                Console.WriteLine("Error cuentas tarjetas: " + e.Message);
                 throw;
             }
             return accounts.Count();
@@ -156,7 +154,7 @@ namespace MigradorDapper
             int[] states = new int[] { 1, 2, 3, 5, 6, 11, 12, 13 };
             Cards cardNew = new Cards();
             List<Cards> cards = new List<Cards>();
-            var branchId = await ccRepo.GetBranchById(institutionID);
+            var branchId = await phiAdminRepo.GetBranchById(institutionID);
             var tarjetas = await ccRepo.GetOrderCards(states);
             var clientes = await ccRepo.GetClientsById();
 
@@ -227,15 +225,14 @@ namespace MigradorDapper
             }
             try
             {
-                var migrated = await phiAdminRepo.MigrateTarjetasOrden29(cards);
+                var migrated = await admTddsRepo.MigrateTarjetasOrden29(cards);
             }
             catch (Exception e)
             {
-                Console.WriteLine("error tarjeta: " + e.Message);
+                Console.WriteLine("Error tarjetas orden: " + e.Message);
                 throw;
             }
             return cards.Count();
         }
-
     }
 }

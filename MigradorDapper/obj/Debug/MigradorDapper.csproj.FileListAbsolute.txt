@@ -7,3 +7,12 @@ C:\Users\Admin\source\repos\MigradorDapper\obj\Debug\MigradorDapper.csprojAssemb
 C:\Users\Admin\source\repos\MigradorDapper\obj\Debug\MigradorDapper.csproj.CopyComplete
 C:\Users\Admin\source\repos\MigradorDapper\obj\Debug\MigradorDapper.exe
 C:\Users\Admin\source\repos\MigradorDapper\obj\Debug\MigradorDapper.pdb
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\bin\Debug\MigradorDapper.exe.config
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\bin\Debug\MigradorDapper.exe
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\bin\Debug\MigradorDapper.pdb
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\bin\Debug\Dapper.dll
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\bin\Debug\Dapper.xml
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\obj\Debug\MigradorDapper.csprojAssemblyReference.cache
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\obj\Debug\MigradorDapper.csproj.CopyComplete
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\obj\Debug\MigradorDapper.exe
+C:\source\migrador29\Migrador-Dapper\MigradorDapper\obj\Debug\MigradorDapper.pdb
