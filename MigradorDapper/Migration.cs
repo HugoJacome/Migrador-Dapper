@@ -111,7 +111,7 @@ namespace MigradorDapper
             CardsAccounts account = new CardsAccounts();
             List<CardsAccounts> accounts = new List<CardsAccounts>();
 
-            var tarjetas = await ccRepo.GetCards();
+            var tarjetas = await admTddsRepo.GetCards();
             var cuentasTarjetas = await ccRepo.GetAccountCards();
 
             var accountsM = tarjetas
@@ -156,7 +156,7 @@ namespace MigradorDapper
             List<Cards> cards = new List<Cards>();
             var branchId = await phiAdminRepo.GetBranchById(institutionID);
             var tarjetas = await ccRepo.GetOrderCards(states);
-            var clientes = await ccRepo.GetClientsById();
+            var clientes = await admTddsRepo.GetClientsById();
 
             var cardsOld = tarjetas
                    .Join(clientes,
@@ -222,6 +222,7 @@ namespace MigradorDapper
                     RequestBranchId = branchId,
                     CardNumber = card.CardNumber
                 };
+                cards.Add(cardNew);
             }
             try
             {

@@ -35,7 +35,7 @@ namespace MigradorDapper.Repositories
      
         public async Task<Cliente[]> GetClients(int[] states)
         {
-            const string query = @"SELECT
+            const string query = @"SELECT 
                                     C.CLI_IDENTIFICACION, C.CLI_NOMBRE, T.AGE_CODIGO
                                     FROM TARJETA_CUENTA TC 
                                     JOIN CLIENTE C 
@@ -45,20 +45,14 @@ namespace MigradorDapper.Repositories
                                     WHERE T.EST_TAR_CODIGO IN  @STATES";
             return (await EnumerableQueryAsync<Cliente>(query, new { STATES = states })).ToArray();
         }
-
-
-        public async Task<Clients[]> GetClientsById()
-        {
-            const string query = @"SELECT top 5 ID, IDENTIFICATION from clients";
-            return (await EnumerableQueryAsync<Clients>(query, new { })).ToArray();
-        }
+                
         public async Task<Tarjeta[]> GetOrderCards(int[] states)
         {
-            const string query = @"SELECT top 5
+            const string query = @"SELECT top 400
                                     T.TAR_ID, T.ORD_CODIGO, T.EST_TAR_CODIGO, T.TAR_FECHA_EXPIRACION,
                                     T.TAR_FECHA_ULTIMO_MOV, T.TAR_FECHA_SOLICITUD, T.TAR_FECHA_ULT_CAMBIOPIN,                                    
-                                    C.CLI_IDENTIFICACION, T.TAR_OFFSET, T.TAR_EMV_SEC, .TAR_NOMBRE_IMPRESO,
-                                    TT.AGE_CODIGO, T.TAR_NUMERO, T.TAR_HASH, T.TAR_NUMERO, T.TAR_FECHA_ENTREGA,
+                                    C.CLI_IDENTIFICACION, T.TAR_OFFSET, T.TAR_EMV_SEC, T.TAR_NOMBRE_IMPRESO,
+                                    T.AGE_CODIGO, T.TAR_NUMERO, T.TAR_HASH, T.TAR_NUMERO, T.TAR_FECHA_ENTREGA,
                                     TC.CTA_NUMERO
                                     FROM TARJETA_CUENTA TC
                                     JOIN TARJETA T 
@@ -69,14 +63,10 @@ namespace MigradorDapper.Repositories
             return (await EnumerableQueryAsync<Tarjeta>(query, new { STATES = states })).ToArray();
         }
 
-        public async Task<Cards[]> GetCards()
-        {
-            const string query = @"SELECT top 5 ID, CARDNUMBER from CARDS";
-            return (await EnumerableQueryAsync<Cards>(query, new {})).ToArray();
-        }
+        
         public async Task<Tarjeta[]> GetAccountCards()
         {
-            const string query = @"SELEC top 5 CTA_NUMERO, TAR_ID FROM TARJETA_CUENTA";
+            const string query = @"SELECT top 400 CTA_NUMERO, TAR_ID FROM TARJETA_CUENTA";
             return (await EnumerableQueryAsync<Tarjeta>(query, new {})).ToArray();
         }
     }

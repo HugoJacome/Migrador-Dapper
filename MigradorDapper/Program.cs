@@ -15,7 +15,8 @@ namespace MigradorDapper
             //await migration.MigraAgencias();
             //await migration.MigraOrdenes();
             //await migration.MigrarClientes29();
-            await migration.MigraTarjetasOrden29();
+            //await migration.MigraTarjetasOrden29();
+            await migration.MigraCuentasTarjetas29();
         }
     }
 }

@@ -36,6 +36,16 @@ namespace MigradorDapper.Repositories
             return await InsertQueryAsync<int>(query, orders);
         }
 
+        public async Task<Clients[]> GetClientsById()
+        {
+            const string query = @"SELECT ID, IDENTIFICATION FROM CLIENTS";
+            return (await EnumerableQueryAsync<Clients>(query, new { })).ToArray();
+        }
+        public async Task<Cards[]> GetCards()
+        {
+            const string query = @"SELECT top 400 ID, CARDNUMBER from CARDS";
+            return (await EnumerableQueryAsync<Cards>(query, new { })).ToArray();
+        }
         public async Task<int> MigrateClients(List<Clients> clients)
         {
             const string query = @"INSERT INTO [dbo].[Clients]

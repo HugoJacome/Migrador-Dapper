@@ -47,5 +47,6 @@ namespace MigradorDapper.Repositories
                                     WHERE INSTITUTIONID = @BRANCHID";
             return (await QuerySingleOrDefaultAsync<int>(query, new { BRANCHID = branchId }));
         }
+        
     }
 }
