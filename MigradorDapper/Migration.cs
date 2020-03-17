@@ -116,8 +116,8 @@ namespace MigradorDapper
 
             var accountsM = tarjetas
                 .Join(cuentasTarjetas,
-                    t => Convert.ToInt32(t.CardNumber),
-                    tc => tc.TAR_ID,
+                    t => t.CardNumber,
+                    tc => tc.TAR_NUMERO,
                     (t, tar) => new { t, tar })
                     .Select(tarjeta => new
                     {

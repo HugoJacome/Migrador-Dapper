@@ -48,7 +48,7 @@ namespace MigradorDapper.Repositories
                 
         public async Task<Tarjeta[]> GetOrderCards(int[] states)
         {
-            const string query = @"SELECT top 400
+            const string query = @"SELECT
                                     T.TAR_ID, T.ORD_CODIGO, T.EST_TAR_CODIGO, T.TAR_FECHA_EXPIRACION,
                                     T.TAR_FECHA_ULTIMO_MOV, T.TAR_FECHA_SOLICITUD, T.TAR_FECHA_ULT_CAMBIOPIN,                                    
                                     C.CLI_IDENTIFICACION, T.TAR_OFFSET, T.TAR_EMV_SEC, T.TAR_NOMBRE_IMPRESO,
@@ -66,7 +66,8 @@ namespace MigradorDapper.Repositories
         
         public async Task<Tarjeta[]> GetAccountCards()
         {
-            const string query = @"SELECT top 400 CTA_NUMERO, TAR_ID FROM TARJETA_CUENTA";
+            const string query = @"SELECT TC.CTA_NUMERO, T.TAR_NUMERO FROM TARJETA_CUENTA TC
+                                    JOIN TARJETA T ON T.TAR_ID = TC.TAR_ID";
             return (await EnumerableQueryAsync<Tarjeta>(query, new {})).ToArray();
         }
     }

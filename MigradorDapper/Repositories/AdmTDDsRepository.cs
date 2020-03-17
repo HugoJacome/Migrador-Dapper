@@ -43,7 +43,7 @@ namespace MigradorDapper.Repositories
         }
         public async Task<Cards[]> GetCards()
         {
-            const string query = @"SELECT top 400 ID, CARDNUMBER from CARDS";
+            const string query = @"SELECT ID, CARDNUMBER from CARDS";
             return (await EnumerableQueryAsync<Cards>(query, new { })).ToArray();
         }
         public async Task<int> MigrateClients(List<Clients> clients)
