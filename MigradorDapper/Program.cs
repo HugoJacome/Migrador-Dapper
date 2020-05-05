@@ -12,11 +12,11 @@ namespace MigradorDapper
         {
             Migration migration = new Migration();
 
-            //await migration.MigraAgencias();
-            //await migration.MigraOrdenes();
-            //await migration.MigrarClientes29();
-            //await migration.MigraTarjetasOrden29();
-            await migration.MigraCuentasTarjetas29();
+            // await migration.MigraAgencias();
+            // await migration.MigraOrdenes();
+            // await migration.MigrarClientes29();
+            await migration.MigraTarjetasOrden29();
+            // await migration.MigraCuentasTarjetas29();
         }
     }
 }

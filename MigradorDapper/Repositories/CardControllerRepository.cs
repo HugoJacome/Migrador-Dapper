@@ -35,7 +35,7 @@ namespace MigradorDapper.Repositories
      
         public async Task<Cliente[]> GetClients(int[] states)
         {
-            const string query = @"SELECT 
+            const string query = @"SELECT
                                     C.CLI_IDENTIFICACION, C.CLI_NOMBRE, T.AGE_CODIGO
                                     FROM TARJETA_CUENTA TC 
                                     JOIN CLIENTE C 
@@ -66,7 +66,7 @@ namespace MigradorDapper.Repositories
         
         public async Task<Tarjeta[]> GetAccountCards()
         {
-            const string query = @"SELECT TC.CTA_NUMERO, T.TAR_NUMERO FROM TARJETA_CUENTA TC
+            const string query = @"SELECT T.TAR_ID, TC.CTA_NUMERO, T.TAR_NUMERO FROM TARJETA_CUENTA TC
                                     JOIN TARJETA T ON T.TAR_ID = TC.TAR_ID";
             return (await EnumerableQueryAsync<Tarjeta>(query, new {})).ToArray();
         }
